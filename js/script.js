@@ -69,6 +69,16 @@ function addTaskToCompleted(todoId) {
     document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
+function findTodoIndex(todoId) {
+    for (const index in todos) {
+        if (todos[index].id === todoId) {
+            return index;
+        }
+    }
+
+    return -1;
+}
+
 function removeTaskFromCompleted(todoId) {
     const todoTarget = findTodoIndex(todoId);
 
