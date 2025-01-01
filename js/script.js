@@ -34,9 +34,36 @@ function generateTodoObject(id, task, timestamp, isCompleted) {
 }
 
 document.addEventListener(RENDER_EVENT, function () {
-    console.log(todos);
+    const uncompletedTODOList = document.getElementById('todos');
+    uncompletedTODOList.innerHTML = '';
+
+    for (const todoItem of todos) {
+        const todoElement = makeTodo(todoItem);
+        if (!todoItem.isCompleted) {
+            uncompletedTODOList.append(todoElement);
+        }
+    }
 });
 
+
+function findTodo(todoId) {
+    for (const todoItem of todos) {
+        if (todoItem.id === todoId) {
+            return todoItem;
+        }
+    }
+
+    return null;
+}
+
+function addTaskToCompleted(todoId) {
+    const todoTarget = findTodo(todoId);
+
+    if (todoTarget == null) return;
+
+    todoTarget.isCompleted = true;
+    document.dispatchEvent(new Event(RENDER_EVENT));
+}
 
 function makeTodo(todoObject) {
     const textTitle = document.createElement('h2');
@@ -53,6 +80,34 @@ function makeTodo(todoObject) {
     container.classList.add('item', 'shadow');
     container.append(textContainer);
     container.setAttribute('id', `todo-${todoObject.id}`);
+
+
+    if (todoObject.isCompleted) {
+        const undoButton = document.createElement('button');
+        undoButton.classList.add('undo-button');
+
+        undoButton.addEventListener('click', function () {
+            undoTaskFromCompled(todoObject.id);
+        });
+
+        const trashButton = document.createElement('button');
+        trashButton.classList.add('trash-button');
+
+        trashButton.addEventListener('click', function () {
+            removeTaskFromCompleted(todoObject.id);
+        });
+
+        container.append(undoButton, trashButton);
+    } else {
+        const checkButton = document.createElement('button');
+        checkButton.classList.add('check-button');
+
+        checkButton.addEventListener('click', function () {
+            addTaskToCompleted(todoObject.id);
+        });
+
+        container.append(checkButton);
+    }
 
     return container;
 }
