@@ -36,14 +36,18 @@ function generateTodoObject(id, task, timestamp, isCompleted) {
 document.addEventListener(RENDER_EVENT, function () {
     const uncompletedTODOList = document.getElementById('todos');
     uncompletedTODOList.innerHTML = '';
-
+   
+    const completedTODOList = document.getElementById('completed-todos');
+    completedTODOList.innerHTML = '';
+   
     for (const todoItem of todos) {
-        const todoElement = makeTodo(todoItem);
-        if (!todoItem.isCompleted) {
-            uncompletedTODOList.append(todoElement);
-        }
+      const todoElement = makeTodo(todoItem);
+      if (!todoItem.isCompleted)
+        uncompletedTODOList.append(todoElement);
+      else
+        completedTODOList.append(todoElement);
     }
-});
+  });
 
 
 function findTodo(todoId) {
@@ -111,13 +115,3 @@ function makeTodo(todoObject) {
 
     return container;
 }
-
-document.addEventListener(RENDER_EVENT, function () {
-    const uncompletedTODOList = document.getElementById('todos');
-    uncompletedTODOList.innerHTML = '';
-
-    for (const todoItem of todos) {
-        const todoElement = makeTodo(todoItem);
-        uncompletedTODOList.append(todoElement);
-    }
-});
