@@ -12,7 +12,7 @@ html, body {
 }
 
 header {
-    background: #5F30E2;
+    background: #4A90E2;
     padding: 16px;
     color: white;
 }
@@ -27,7 +27,7 @@ header {
     width: 1024px;
     border-radius: 8px;
     margin: 16px;
-    background: #F8F9FA;
+    background: #EAF4FC;
     padding: 16px;
     flex-grow: 1;
     height: fit-content;
@@ -49,6 +49,7 @@ header {
 
 .item > .inner p {
     margin-top: 5px;
+    color: #2C3E50;
 }
 
 .form {
@@ -57,6 +58,7 @@ header {
     flex-direction: column;
     height: 300px;
     border-radius: 16px;
+    background: #F0F8FF;
 }
 
 .form-group {
@@ -68,6 +70,7 @@ header {
     margin-bottom: 4px;
     font-size: 18px;
     font-weight: lighter;
+    color: #34495E;
 }
 
 .shadow {
@@ -76,8 +79,8 @@ header {
 
 input[type=text], input[type=date] {
     font-family: Raleway, sans-serif;
-    background: #F5F1FF;
-    border: 2px solid #9475EA;
+    background: #EBF5FF;
+    border: 2px solid #4A90E2;
     border-radius: 8px;
     padding: 16px;
     box-sizing: border-box;
@@ -90,16 +93,18 @@ input[type=text], input[type=date] {
     font-family: Raleway, sans-serif;
     border-radius: 16px;
     padding: 12px 24px;
-    border: 2px solid #5F30E2;
-    color: black;
+    border: 2px solid #4A90E2;
+    color: #34495E;
     font-size: 24px;
     margin-top: auto;
     align-self: flex-end;
     cursor: pointer;
+    background: #EAF4FC;
+    transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
-    background: #5F30E2;
+    background: #4A90E2;
     color: white;
 }
 
@@ -184,4 +189,29 @@ input[type=text], input[type=date], .btn-submit:focus {
     .form {
         width: 100%;
     }
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4A90E2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    opacity: 1;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(0);
+    z-index: 1000;
+}
+  
+.toast.hide {
+    opacity: 0;
+    transform: translateY(20px);
+}  
+
+.check-button:hover, .trash-button:hover, .undo-button:hover {
+    filter: brightness(0.85);
 }

@@ -172,6 +172,7 @@ function isStorageExist() {
 
 document.addEventListener(SAVED_EVENT, function () {
     console.log(localStorage.getItem(STORAGE_KEY));
+    showToast("Data berhasil disimpan!")
 });
 
 function loadDataFromStorage() {
@@ -187,3 +188,20 @@ function loadDataFromStorage() {
     document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.innerHTML = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("hide");
+    }, 1000);
+
+    toast.addEventListener('transitionend', () => {
+        if (toast.classList.contains('hide')) {
+            toast.remove();
+        }
+    })
+}
